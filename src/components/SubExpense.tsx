@@ -9,11 +9,49 @@ import {InProps as IProps} from './AddExpense'
 
 type Props = {
   State: IProps[];
+  click: boolean;
+  // setclick: React.Dispatch<React.SetStateAction<Props['click']>>;
+  setclick: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 
-const SubExpense: React.FC<Props> = ({State}) => {
-  const [clicked, setclicked] = useState<boolean>(false);
+const SubExpense: React.FC<Props> = ({State,click,setclick}) => {
+//   const balance = ()=>{
+//     let element = 0;
+//   for (let i = 0; i < State.length; i++) {
+//      element += Number(State[i].amount);  
+//      console.log(element)
+//   }
+//   return element.toFixed(2)
+// }
+
+const balance = (a:number,b:number)=>{
+  let element = a-b;
+  return element.toFixed(2);
+}
+
+  const incomeBalance = ()=>{
+    let element = 0;
+    for (let i = 0; i < State.length; i++) {
+      if(State[i].type === 'ADD'){
+       element += Number(State[i].amount);
+       console.log(element)
+      }
+    }
+    return Number(element.toFixed(2));
+  }
+
+  const expenseBalance = ()=>{
+    let element = 0;
+    for (let i = 0; i < State.length; i++) {
+      if(State[i].type === 'EXPENSE'){
+       element += Number(State[i].amount);
+       console.log(element)
+      }
+    }
+    return Number(element.toFixed(2));
+  }
+
   return (
   <motion.div animate={{y:[-300,100,0],opacity:[0,1]}} transition={{duration:1.7}} className='sub-expense'>
       <div className="user">
@@ -34,8 +72,8 @@ const SubExpense: React.FC<Props> = ({State}) => {
       <div className="expense-feed">
         <div className="expense-sub-feed">
         <div className="total-balance">
-          <p>Total Balance</p>
-          <p>$ 0.00</p>
+          <p>Your Balance</p>
+          <p>$ {balance(incomeBalance(),expenseBalance())}</p>
         </div>
         <div className="balance-transaction">
           <div className="income-detail detail">
@@ -44,7 +82,7 @@ const SubExpense: React.FC<Props> = ({State}) => {
           </div>
           <div className="income">
             <p>Income</p>
-            <p>$ 2500.00</p>
+            <p>$ {incomeBalance()}</p>
           </div>
           </div>
           <div className="expenses-detail detail">
@@ -53,7 +91,7 @@ const SubExpense: React.FC<Props> = ({State}) => {
             </div>
           <div className="expenses">
             <p>Expense</p>
-            <p>$ 2500.00</p>
+            <p>$ {expenseBalance()}</p>
           </div>
         </div>
       </div>
@@ -62,10 +100,10 @@ const SubExpense: React.FC<Props> = ({State}) => {
     <TransactionHistory state={State}/>
     {/* <div className={window.scrollY===0?"add-btn cursor bk":"add-btn cursor"}> */}
 
-     {/* <div className={`add-btn cursor ${window.scrollY===0?"bk":""}`}>
+     <div className={'add-btn cursor'} onClick={()=>{setclick(false); console.log('working')}}>
       <p>+</p>
-    </div> */}
-    
+    </div>
+
     </motion.div>
   )
 }

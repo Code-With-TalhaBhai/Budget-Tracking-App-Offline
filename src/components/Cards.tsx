@@ -2,15 +2,18 @@ import React from 'react'
 import '../App.css'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import {InProps as Props} from './AddExpense';
+import DeleteIcon from '@mui/icons-material/Delete';
+// import {InProps as Props} from './AddExpense';
 
-// type Props = {
-//   text: string;
-//   amount: number;
-//   type: string
-// }
+type Props = {
+  num: number;
+  text: string;
+  amount: number | string;
+  type: string;
+  del: (arg:number)=> void;
+}
 
-function Cards({text,amount,type}: Props) {
+function Cards({num,text,amount,type,del}: Props) {
   return (
     //   <div>
     <div className="card">
@@ -25,6 +28,7 @@ function Cards({text,amount,type}: Props) {
                 </div>
                 <div className="price">
                     $ {amount}
+                <DeleteIcon style={{fontSize:'30px'}} className="delete cursor" onClick={()=>del(num)}/>
                 </div>
             </div>
     // <div className="card">

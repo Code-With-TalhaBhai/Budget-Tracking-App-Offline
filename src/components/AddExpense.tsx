@@ -15,7 +15,9 @@ type Props = {
   transaction:{
     State: InProps[],
     reduceProcess: (arg:StateProps["IProps"])=> void;
-  }
+  },
+  click: boolean;
+  setclick: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface InProps {
@@ -24,11 +26,12 @@ export interface InProps {
   type: "ADD" | "EXPENSE";
 }
 
+
 type StateProps = {
- IProps: InProps
+ IProps: InProps;
 }
   
-const AddExpense : React.FC<Props> = ({transaction}) => {
+const AddExpense : React.FC<Props> = ({transaction,click,setclick}) => {
   const category = useRef<HTMLInputElement>(null);
   // const [object, setobject] = useState<StateProps['IProps']>({
   const [object, setobject] = useState<StateProps['IProps']>({
@@ -42,22 +45,18 @@ const AddExpense : React.FC<Props> = ({transaction}) => {
   
   const addExpense = (e:React.SyntheticEvent)=>{
     e.preventDefault();
-      // var letters = /^[A-Za-z]+$/;
-      // if(object.text.match(letters))
-        // {
-        //  return true;
+      var letters = /^[A-Za-z\s]+$/;
+      if(object.text.match(letters))
+        {
          console.log(object);
          transaction.reduceProcess(object);
          console.log(transaction.State);
-        // }
-      // else
-        // {
-        // alert("Please only use letters in CATEGORY");
-        // return false;
-        // } 
-        // transaction(object);
-       
-    // console.log(transaction)
+         setclick(true)
+        }
+      else
+        {
+        alert("Please only use letters in CATEGORY");
+        } 
   }
   
   const changeExpense = (e:React.ChangeEvent<HTMLInputElement | HTMLSelectElement>):void=>{
@@ -67,7 +66,7 @@ const AddExpense : React.FC<Props> = ({transaction}) => {
 
     return (
       <motion.div animate={{y:[-300,100,0],opacity:[0,1]}} transition={{duration:1.7}} className='addExpense'>
-        <div className="clear-icon cursor">
+        <div className="clear-icon cursor" onClick={()=>setclick(true)}>
         <ClearIcon/>
         </div>
         {/* <h2 style={{'textAlign':'left'}}>Add Expenses</h2> */}
@@ -77,7 +76,7 @@ const AddExpense : React.FC<Props> = ({transaction}) => {
         <div className="e-add">
           <p> Category</p>
         <div className="ex-add fo-sm">
-            <input type="text" name='text' value={object.text} onChange={changeExpense} ref={category} placeholder='Enter your category' className='ex-amount cursor' minLength={3} maxLength={20} required/>
+            <input type="text" name='text' value={object.text} onChange={changeExpense} ref={category} placeholder='Enter your category' className='ex-amount cursor' minLength={3} maxLength={23} required/>
         </div>
         </div>
         <div className="e-add">

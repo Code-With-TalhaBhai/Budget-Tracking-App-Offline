@@ -33,7 +33,7 @@ export const ReducerProvider:React.FC=({children})=>{
         payload:{
             text: obj.text, 
             amount: obj.amount,
-            type: obj.type
+            type: obj.type,
         }
     })
     }
