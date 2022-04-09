@@ -76,7 +76,7 @@ const AddExpense : React.FC<Props> = ({transaction,click,setclick}) => {
         <div className="e-add">
           <p> Category</p>
         <div className="ex-add fo-sm">
-            <input type="text" name='text' value={object.text} onChange={changeExpense} ref={category} placeholder='Enter your category' className='ex-amount cursor' minLength={3} maxLength={23} required/>
+            <input type="text" name='text' value={object.text} onChange={changeExpense} ref={category} placeholder='Enter your category' className='ex-amount cursor' minLength={3} maxLength={6} required/>
         </div>
         </div>
         <div className="e-add">

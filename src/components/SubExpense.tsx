@@ -16,14 +16,12 @@ type Props = {
 
 
 const SubExpense: React.FC<Props> = ({State,click,setclick}) => {
-//   const balance = ()=>{
-//     let element = 0;
-//   for (let i = 0; i < State.length; i++) {
-//      element += Number(State[i].amount);  
-//      console.log(element)
-//   }
-//   return element.toFixed(2)
-// }
+  const [history, setHistory] = useState<IProps[]>(State);
+    function deleteTransaction (elem:number):void{
+    console.log(State.splice(elem,1));
+    setHistory([...State]);
+    console.log(history);
+  }
 
 const balance = (a:number,b:number)=>{
   let element = a-b;
@@ -32,9 +30,9 @@ const balance = (a:number,b:number)=>{
 
   const incomeBalance = ()=>{
     let element = 0;
-    for (let i = 0; i < State.length; i++) {
-      if(State[i].type === 'ADD'){
-       element += Number(State[i].amount);
+    for (let i = 0; i < history.length; i++) {
+      if(history[i].type === 'ADD'){
+       element += Number(history[i].amount);
        console.log(element)
       }
     }
@@ -43,9 +41,9 @@ const balance = (a:number,b:number)=>{
 
   const expenseBalance = ()=>{
     let element = 0;
-    for (let i = 0; i < State.length; i++) {
-      if(State[i].type === 'EXPENSE'){
-       element += Number(State[i].amount);
+    for (let i = 0; i < history.length; i++) {
+      if(history[i].type === 'EXPENSE'){
+       element += Number(history[i].amount);
        console.log(element)
       }
     }
@@ -97,7 +95,7 @@ const balance = (a:number,b:number)=>{
       </div>
     </div>
     </div>
-    <TransactionHistory state={State}/>
+    <TransactionHistory state={history} pmln={deleteTransaction}/>
     {/* <div className={window.scrollY===0?"add-btn cursor bk":"add-btn cursor"}> */}
 
      <div className={'add-btn cursor'} onClick={()=>{setclick(false); console.log('working')}}>

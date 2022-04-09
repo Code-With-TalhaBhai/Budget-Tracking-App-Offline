@@ -5,10 +5,16 @@
   :root{
     --cardWidth: 70vw;
   }
+  .ex-add{
+    width: 85%;
+  }
 }
 @media only screen and (max-width: 600px) {
   :root{
     --cardWidth: 85vw;
+  }
+  .ex-add{
+    width: 92%;
   }
 }
 .App {
@@ -280,8 +286,8 @@
   font-size: 40px;
   /* border: 2px solid black; */
   color: white;
-  width:  4vw;
-  height: 4vw;
+  width:  3.8rem;
+  height: 3.8rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -319,7 +325,8 @@
   border-radius: 50px;
   background-color: white;
   width: 70%;
-  height: 60px;
+  /* width: inherit; */
+  height: 3.8rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -345,7 +352,7 @@
 .ex-add input, .ex-add select{
   /* min-width: 20%; */
   text-align: center;
-  width: 50%;
+  width: 80%;
   border: none;
 }
 .ex-add input:focus,.ex-add select:focus{

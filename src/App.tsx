@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { ReducerProvider } from './components/ContextApi/ReducerProvider';
 import Expense from './components/Expense';
+import app from './firebase.js';
 
 function App() {
   return (

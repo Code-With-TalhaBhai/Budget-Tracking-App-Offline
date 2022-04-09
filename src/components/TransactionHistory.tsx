@@ -5,17 +5,18 @@ import '../App.css'
 import { InProps as IProps } from './AddExpense'
 import Card from './Cards'
 type Props = {
-  state: IProps[]
+  state: IProps[];
+  pmln: (arg:number)=>void;
 }
 
 
-export default function TransactionHistory({state}: Props) {
-  const [history, setHistory] = useState<IProps[]>(state);
-    function deleteTransaction (elem:number):void{
-    console.log(state.splice(elem,1));
-    setHistory([...state]);
-    console.log(history);
-  }
+export default function TransactionHistory({state,pmln}: Props) {
+  // const [history, setHistory] = useState<IProps[]>(state);
+  //   function deleteTransaction (elem:number):void{
+  //   console.log(state.splice(elem,1));
+  //   setHistory([...state]);
+  //   console.log(history);
+  // }
   console.log(state)
   return (
     <div className='transactions'>
@@ -25,9 +26,9 @@ export default function TransactionHistory({state}: Props) {
         </div>
         <div className="transaction-card">
           {
-          history.map((element:IProps,index:number)=>
+          state.map((element:IProps,index:number)=>
             {
-            return <Card key={index} num={index} text={element.text} amount={element.amount} type={element.type} del={deleteTransaction}/>
+            return <Card key={index} num={index} text={element.text} amount={element.amount} type={element.type} del={pmln}/>
             }
           )
         }
